@@ -29,6 +29,7 @@
     owner: root
     group: root
     mode: '0644'
+    validate: logrotate -d %s
   loop:
     - "btmp"
     - "wtmp"
@@ -42,9 +43,4 @@
     group: root
     mode: '0644'
     validate: logrotate -d %s
-
-- name: "Check logrotate Configuration."
-  shell: logrotate -d /etc/logrotate.conf
-  register: logrotate_status
-  changed_when: logrotate_status.rc > 1
-  failed_when: logrotate_status.rc > 1
+  when: webserver_name != "none"
