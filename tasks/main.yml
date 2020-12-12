@@ -1,0 +1,50 @@
+---
+- name: "Preflight - Fail if target host is not stable for this Role."
+  fail:
+    msg: "This role is not stable for the target operating system, {{ ansible_distribution }} {{ ansible_distribution_major_version }}."
+  when: (ansible_distribution is not defined) or
+        (ansible_distribution_version is not defined) or
+        (ansible_distribution+" "+ansible_distribution_major_version not in logrotate_stable_os)
+
+- name: "Install Prerequisites."
+  package:
+    name: logrotate
+    state: present
+
+- name: "Configure Logrotate."
+  template:
+    src: logrotate.conf.j2
+    dest: /etc/logrotate.conf
+    backup: 'true'
+    owner: root
+    group: root
+    mode: '0644'
+    validate: logrotate -d %s
+
+- name: "Configure Custom Logrotate Sections."
+  template:
+    src: "{{ item }}.j2"
+    dest: "/etc/logrotate.d/{{ item }}"
+    backup: 'true'
+    owner: root
+    group: root
+    mode: '0644'
+  loop:
+    - "btmp"
+    - "wtmp"
+
+- name: "Configure Logrotate for Webservers."
+  template:
+    src: "{{ webserver_name }}.j2"
+    dest: "/etc/logrotate.d/{{ webserver_name }}"
+    backup: 'true'
+    owner: root
+    group: root
+    mode: '0644'
+    validate: logrotate -d %s
+
+- name: "Check logrotate Configuration."
+  shell: logrotate -d /etc/logrotate.conf
+  register: logrotate_status
+  changed_when: logrotate_status.rc > 1
+  failed_when: logrotate_status.rc > 1
