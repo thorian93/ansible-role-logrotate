@@ -43,4 +43,15 @@
     group: root
     mode: '0644'
     validate: logrotate -d %s
-  when: webserver_name != "none"
+  when: (webserver_name != "none") and (logrotate_manage_webserver | bool)
+
+- name: "Configure Logrotate for MySQL."
+  template:
+    src: "mysql-server.j2"
+    dest: "/etc/logrotate.d/mysql-server"
+    backup: 'true'
+    owner: root
+    group: root
+    mode: '0644'
+    validate: logrotate -d %s
+  when: logrotate_manage_mysql | bool

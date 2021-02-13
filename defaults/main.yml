@@ -16,8 +16,11 @@ logrotate_stable_os:
   - openSUSE Leap 15
   - openSUSE Leap 42
 
+logrotate_manage_mysql: 'false'
+logrotate_manage_webserver: 'false'
+
 logrotate_interval: "weekly"
-logrotate_keep: "8"
+logrotate_keep: "7"
 logrotate_create: "create"
 logrotate_compress: "compress"
 logrotate_misc_options: []
