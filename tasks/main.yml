@@ -21,7 +21,7 @@
     mode: '0644'
     validate: logrotate -d %s
 
-- name: "Configure Custom Logrotate Sections."
+- name: "Configure BTMP and WTMP Logrotate Sections."
   ansible.builtin.template:
     src: "{{ item }}.j2"
     dest: "/etc/logrotate.d/{{ item }}"
@@ -55,3 +55,14 @@
     mode: '0644'
     validate: logrotate -d %s
   when: logrotate_manage_mysql | bool
+
+- name: "Configure Custom Logrotate Sections."
+  ansible.builtin.template:
+    src: "custom.j2"
+    dest: "/etc/logrotate.d/{{ item.name }}"
+    backup: 'true'
+    owner: root
+    group: root
+    mode: '0644'
+    validate: logrotate -d %s
+  loop: "{{ logrotate_custom_configs }}"

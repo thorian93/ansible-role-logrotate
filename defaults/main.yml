@@ -24,3 +24,15 @@ logrotate_keep: "7"
 logrotate_create: "create"
 logrotate_compress: "compress"
 logrotate_misc_options: []
+
+logrotate_custom_configs: []
+# - name: 'example'
+#   files: '/var/log/example.log'
+#   interval: daily
+#   rotate: '7'
+#   options:
+#     - missingok
+#     - compress
+#     - delaycompress
+#     - dateext
+#     - su root root
