@@ -12,7 +12,7 @@ No special requirements; note that this role requires root access, so either run
 
     - hosts: foobar
       roles:
-        - role: ansible-role-logrotate
+        - role: thorian93.logrotate
           become: yes
 
 ## Role Variables
