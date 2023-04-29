@@ -1,5 +1,14 @@
 # Ansible Role: Logrotate
 
+---
+
+## Unmaintained! Moved to collection!
+This role has moved to my [**main** collection](https://github.com/thorian93/main).  
+It is **not** maintained here anymore!  
+Head over to the [collection](https://github.com/thorian93/main) for up to date content.
+
+---
+
 This role sets up a Linux server with basic logrotate configuration.
 
 [![Ansible Role: Logrotate](https://img.shields.io/ansible/role/55136?style=flat-square)](https://galaxy.ansible.com/thorian93/logrotate)

@@ -15,7 +15,7 @@
   ansible.builtin.template:
     src: logrotate.conf.j2
     dest: /etc/logrotate.conf
-    backup: 'true'
+    backup: true
     owner: root
     group: root
     mode: '0644'
@@ -25,7 +25,7 @@
   ansible.builtin.template:
     src: "{{ item }}.j2"
     dest: "/etc/logrotate.d/{{ item }}"
-    backup: 'true'
+    backup: true
     owner: root
     group: root
     mode: '0644'
@@ -38,7 +38,7 @@
   ansible.builtin.template:
     src: "{{ webserver_name }}.j2"
     dest: "/etc/logrotate.d/{{ webserver_name }}"
-    backup: 'true'
+    backup: true
     owner: root
     group: root
     mode: '0644'
@@ -49,7 +49,7 @@
   ansible.builtin.template:
     src: "mysql-server.j2"
     dest: "/etc/logrotate.d/mysql-server"
-    backup: 'true'
+    backup: true
     owner: root
     group: root
     mode: '0644'
@@ -60,7 +60,7 @@
   ansible.builtin.template:
     src: "custom.j2"
     dest: "/etc/logrotate.d/{{ item.name }}"
-    backup: 'true'
+    backup: true
     owner: root
     group: root
     mode: '0644'
